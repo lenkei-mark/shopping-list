@@ -11,3 +11,5 @@ Share your online shopping list with anyone just through a link
 -ExpressJS
 
 -MongoDB, managed through mongoose package
+
+-TailwindCSS
