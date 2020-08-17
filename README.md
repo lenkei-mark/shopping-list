@@ -1,6 +1,6 @@
-# Shareable shopping list
+# Real-time shopping list
 
-Share your online shopping list with anyone just through a link
+Share your online real-time shopping list with anyone just through a link
 
 # Tools used in this project
 
@@ -11,5 +11,7 @@ Share your online shopping list with anyone just through a link
 -ExpressJS
 
 -MongoDB, managed through mongoose package
+
+-WebSockets managed through sockets.io
 
 -TailwindCSS

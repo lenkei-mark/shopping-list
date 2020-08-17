@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import AddItem from "./AddItem";
-import { createBrowserHistory } from "history";
-
-let history = createBrowserHistory();
+import socketIOCLIENT from "socket.io-client";
 
 class ShoppingList extends Component {
   state = {
@@ -14,8 +12,14 @@ class ShoppingList extends Component {
     this.setState({
       id: this.props.match.params.id,
     });
+    this.socketConnection();
     this.getItems();
   }
+
+  socketConnection = () => {
+    const endPoint = "http://localhost:9000/" + this.props.match.params.id;
+    socketIOCLIENT.connect(endPoint);
+  };
 
   getItems = () => {
     fetch("http://localhost:9000/" + this.props.match.params.id)
@@ -66,9 +70,7 @@ class ShoppingList extends Component {
       method: "DELETE",
     })
       .then((response) => response.json())
-      .then(() => {
-        history.push("/");
-      });
+      .then(() => {});
   };
 
   render() {
