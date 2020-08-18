@@ -39,6 +39,7 @@ class AddItem extends Component {
                 className="rounded text-black"
                 type="text"
                 id="product"
+                placeholder="Name of the product"
                 onChange={this.handleChange}
                 value={this.state.product}
                 required
@@ -69,6 +70,7 @@ class AddItem extends Component {
                 className="rounded text-black"
                 type="text"
                 id="quantityType"
+                placeholder="kg/liter/piece/pack/etc."
                 onChange={this.handleChange}
                 value={this.state.quantityType}
               />

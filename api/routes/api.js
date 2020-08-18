@@ -59,7 +59,12 @@ router.put("/:id/:itemid", (req, res, next) => {
       "products._id": req.params.itemid,
     },
     {
-      $set: { "products.$.bought": true },
+      $set: { 
+        "products.$.bought": req.body.bought,
+        "products.$.product": req.body.product,
+        "products.$.quantity": req.body.quantity,
+        "products.$.quantityType": req.body.quantityType,
+      },
     }
   ).then((err, products) => {res.send({
     error:err,

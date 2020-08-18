@@ -54,9 +54,31 @@ class ShoppingList extends Component {
         product: item.product,
         quantity: item.quantity,
         quantityType: item.quantityType,
-        bought: item.bought
       }),
     })
+      .then((response) => response.json())
+      .then(() => {
+        this.getItems();
+      });
+  };
+
+  updateBought = (item) => {
+    fetch(
+      "http://localhost:9000/" + this.props.match.params.id + "/" + item._id,
+      {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        method: "PUT",
+        body: JSON.stringify({
+          product: item.product,
+          quantity: item.quantity,
+          quantityType: item.quantityType,
+          bought: !item.bought,
+        }),
+      }
+    )
       .then((response) => response.json())
       .then(() => {
         this.getItems();
@@ -86,22 +108,30 @@ class ShoppingList extends Component {
 
   render() {
     const itemList = this.state.products.map((product) => {
-      if(product.bought === false){
+      if (product.bought === false) {
         return (
-          <div onClick={() => {console.log("clicked card")}} key={product._id} className="max-w-sm m-auto rounded shadow-lg bg-blue-400 mb-2 border-blue-600 py-2 px-6 border-b-8">
-            <h2>Product: {product.product}</h2>
-            <h2>Quantity: {product.quantity}</h2>
-            <h2>Quantity type: {product.quantityType}</h2>
-            <button onClick={() => this.deleteItem(product)}>Delete</button>
+          <div
+            onClick={() => this.updateBought(product)}
+            key={product._id}
+            className="max-w-xs m-auto rounded shadow-lg bg-blue-400 mb-2 border-blue-600 py-2 px-6 border-b-8 text-blue-100 font-medium"
+          >
+            <h2>
+              {product.product} {product.quantity} {product.quantityType}
+            </h2>
+            <button className="font-bold text-red-800" onClick={() => this.deleteItem(product)}>X</button>
           </div>
         );
       } else {
         return (
-          <div onClick={() => {console.log("clicked card")}} key={product._id} className="max-w-sm m-auto rounded shadow-lg bg-green-400 mb-2 border-green-600 py-2 px-6 border-b-8">
-            <h2>Product: {product.product}</h2>
-            <h2>Quantity: {product.quantity}</h2>
-            <h2>Quantity type: {product.quantityType}</h2>
-            <button onClick={() => this.deleteItem(product)}>Delete</button>
+          <div
+            onClick={() => this.updateBought(product)}
+            key={product._id}
+            className="max-w-xs m-auto rounded shadow-lg bg-green-400 mb-2 border-green-600 py-2 px-6 border-b-8 text-blue-100 font-medium"
+          >
+            <h2>
+              {product.product} {product.quantity} {product.quantityType}
+            </h2>
+            <button className="font-bold text-red-800" onClick={() => this.deleteItem(product)}>X</button>
           </div>
         );
       }
@@ -109,7 +139,9 @@ class ShoppingList extends Component {
 
     return (
       <div>
-        <h1 className="text-4xl font-bold text-blue-100 mb-10">Shopping list</h1>
+        <h1 className="text-4xl font-bold text-blue-100 mb-10">
+          Shopping list
+        </h1>
         {itemList}
         <AddItem addItem={this.addItem} />
         <button onClick={this.deleteShoppingList}>Delete Shopping List</button>
