@@ -17,7 +17,6 @@ class App extends Component {
         this.setState({
           id: json._id,
         });
-        console.log(this.state.id);
       });
   };
 
@@ -42,7 +41,7 @@ class App extends Component {
     }
     return (
       <BrowserRouter>
-        <div className="App text-center mt-24">
+        <div className="App text-center mt-6">
           <Route exact path="/">
             <h1>
               <button

@@ -11,6 +11,10 @@ const ItemSchema = new Schema({
     },
     quantityType:{
         type: String
+    },
+    bought:{
+        type: Boolean,
+        default: false
     }
 });
 

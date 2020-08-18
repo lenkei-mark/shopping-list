@@ -31,8 +31,13 @@ const server = app.listen(port, () => {
   console.log(`now listening for requests on port ${port}`);
 });
 
-let io = socket(server);
+const io = socket(server);
 
 io.on("connection", (socket) => {
   console.log("made socket connection");
+
+  socket.on("item_added", (item) => {
+    console.log(item);
+    io.sockets.emit("item_added", item);
+  });
 });

@@ -25,31 +25,56 @@ class AddItem extends Component {
 
   render() {
     return (
-      <div>
-        <h1>Add Item</h1>
-        <form onSubmit={this.handleSubmit}>
-          <label htmlFor="product">Product: </label>
-          <input
-            type="text"
-            id="product"
-            onChange={this.handleChange}
-            value={this.state.product}
-          />
-          <label htmlFor="quantity">Quantity: </label>
-          <input
-            type="number"
-            id="quantity"
-            onChange={this.handleChange}
-            value={this.state.quantity}
-          />
-          <label htmlFor="quantity">Quantity Type: </label>
-          <input
-            type="text"
-            id="quantityType"
-            onChange={this.handleChange}
-            value={this.state.quantityType}
-          />
-          <button>Submit</button>
+      <div className="mt-12">
+        <form
+          onSubmit={this.handleSubmit}
+          className="w-full max-w-sm text-blue-100 m-auto"
+        >
+          <div className="flex mb-4">
+            <div className="w-1/3">
+              <label className="mr-2 font-bold">Product: </label>
+            </div>
+            <div className="w-2/3">
+              <input
+                className="rounded text-black"
+                type="text"
+                id="product"
+                onChange={this.handleChange}
+                value={this.state.product}
+                required
+              />
+            </div>
+          </div>
+          <div className="flex mb-4 items-center">
+            <div className="w-1/3">
+              <label className="mr-2 font-bold">Quantity: </label>
+            </div>
+            <div className="w-2/3">
+              <input
+                className="rounded text-black"
+                type="number"
+                id="quantity"
+                onChange={this.handleChange}
+                value={this.state.quantity}
+                required
+              />
+            </div>
+          </div>
+          <div className="flex mb-4 items-center">
+            <div className="w-1/3">
+              <label className="mr-2 font-bold">Quantity Type: </label>
+            </div>
+            <div className="w-2/3">
+              <input
+                className="rounded text-black"
+                type="text"
+                id="quantityType"
+                onChange={this.handleChange}
+                value={this.state.quantityType}
+              />
+            </div>
+          </div>
+          <button className="bg-blue-500 hover:bg-blue-700 text-blue-100 font-bold py-2 px-4 rounded">Add Item</button>
         </form>
       </div>
     );

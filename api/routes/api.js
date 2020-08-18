@@ -51,6 +51,22 @@ router.post("/:id", (req, res, next) => {
   });
 });
 
+//UPDATE item for a shopping list
+router.put("/:id/:itemid", (req, res, next) => {
+  ShoppingList.update(
+    {
+      _id: req.params.id,
+      "products._id": req.params.itemid,
+    },
+    {
+      $set: { "products.$.bought": true },
+    }
+  ).then((err, products) => {res.send({
+    error:err,
+    products: products
+  })})
+});
+
 //DELETE item from a shopping list DONE
 router.delete("/:id/:itemid", (req, res, next) => {
   ShoppingList.findByIdAndUpdate(req.params.id, {
