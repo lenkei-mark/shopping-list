@@ -35,9 +35,9 @@ const io = socket(server);
 
 io.on("connection", (socket) => {
   console.log("made socket connection");
-
-  socket.on("item_added", (item) => {
+  
+  socket.on("itemadded", (item) => {
     console.log(item);
-    io.sockets.emit("item_added", item);
+    io.sockets.emit("itemadded", item);
   });
 });

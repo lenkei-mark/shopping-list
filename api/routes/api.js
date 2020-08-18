@@ -53,7 +53,7 @@ router.post("/:id", (req, res, next) => {
 
 //UPDATE item for a shopping list
 router.put("/:id/:itemid", (req, res, next) => {
-  ShoppingList.update(
+  ShoppingList.updateOne(
     {
       _id: req.params.id,
       "products._id": req.params.itemid,
