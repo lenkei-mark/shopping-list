@@ -2,25 +2,31 @@ import React, { Component } from "react";
 import AddItem from "./AddItem";
 import socketIOClient from "socket.io-client";
 
+let socket;
+
 class ShoppingList extends Component {
   state = {
     id: null,
     products: [],
-    socket: socketIOClient.connect(
+    /*socket: socketIOClient(
       "http://localhost:9000/" + this.props.match.params.id
-    ),
+    ),*/
   };
 
   componentDidMount() {
     this.setState({
       id: this.props.match.params.id,
     });
+    socket = socketIOClient.connect("http://localhost:9000/" + this.props.match.params.id);
     this.socketListen();
+    /*etInterval(() => {
+      this.getItems();
+    }, 1000);*/
     this.getItems();
   }
 
   socketListen = () => {
-    this.state.socket.on("item_added", (data) => {
+    socket.on("itemadded", (data) => {
       let products = [...this.state.products, data];
       this.setState({
         products: products,
@@ -41,7 +47,7 @@ class ShoppingList extends Component {
   };
 
   addItem = (item) => {
-    this.state.socket.emit("item_added", {
+    socket.emit("itemadded", {
       item,
     });
     fetch("http://localhost:9000/" + this.props.match.params.id, {
