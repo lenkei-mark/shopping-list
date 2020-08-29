@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter, Route, Redirect } from "react-router-dom";
+import CreateShoppingList from "./components/CreateShoppingList";
 import ShoppingList from "./components/ShoppingList";
 
 class App extends Component {
@@ -20,12 +21,10 @@ class App extends Component {
       });
   };
 
-  /*componentDidMount(){
-    this.createShoppingList();
-  }*/
-
-  handleClick = () => {
-    this.createShoppingList();
+  nullId = () => {
+    this.setState({
+      id: null,
+    });
   };
 
   render() {
@@ -34,7 +33,12 @@ class App extends Component {
         <BrowserRouter>
           <div className="App text-center mt-24">
             <Redirect push to={"/" + this.state.id} />
-            <Route path="/:id" component={ShoppingList} />
+            <Route
+              path="/:id"
+              render={(props) => (
+                <ShoppingList {...props} nullId={this.nullId} />
+              )}
+            />
           </div>
         </BrowserRouter>
       );
@@ -43,19 +47,8 @@ class App extends Component {
       <BrowserRouter>
         <div className="App text-center mt-6">
           <Route exact path="/">
-            <h1>
-              <button
-                className="bg-blue-500 text-4xl hover:bg-blue-400 text-white font-bold py-4 px-8 border-b-8 border-blue-600 hover:border-blue-500 rounded"
-                onClick={this.handleClick}
-              >
-                Create your shopping list
-              </button>
-            </h1>
-            <h1 className="text-2xl font-bold text-white mt-12">
-              Your online shareable shopping list
-            </h1>
+            <CreateShoppingList createShoppingList={this.createShoppingList}/>
           </Route>
-          <Route path="/:id" component={ShoppingList} />
         </div>
       </BrowserRouter>
     );

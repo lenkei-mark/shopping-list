@@ -109,7 +109,10 @@ class ShoppingList extends Component {
       method: "DELETE",
     })
       .then((response) => response.json())
-      .then(() => {});
+      .then(() => {
+        this.props.nullId();
+        this.props.history.push('/');
+      });
   };
 
   render() {
